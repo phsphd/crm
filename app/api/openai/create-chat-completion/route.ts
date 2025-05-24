@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const gptModel = await prismadb.gpt_models.findMany({
+    const gptModel = await prismadb.gptModel.findMany({
       where: {
         status: "ACTIVE",
       },

@@ -25,7 +25,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import updateModel from "@/actions/admin/update-gpt-model";
 import { useRouter } from "next/navigation";
-import { gpt_models } from "@prisma/client";
+import { GptModel } from "@prisma/client";
 
 const FormSchema = z.object({
   model: z.string().min(10).max(30),
