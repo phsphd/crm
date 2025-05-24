@@ -82,3 +82,8 @@ bash# Generate a random secret
 openssl rand -base64 32
 
 # Or use this online tool: https://generate-secret.vercel.app/32
+
+
+git add .
+git commit -m "---"
+git push

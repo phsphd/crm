@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate &&  prisma db push && prisma db seed && next build",
+    "build": "prisma generate && prisma db push && next build",
+    "build:with-seed": "prisma generate && prisma db push && prisma db seed && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "prisma db seed",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate"
   },
   "prisma": {
     "seed": "ts-node ./prisma/seeds/seed.ts"
