@@ -6,7 +6,7 @@ import { prismadb } from "./prisma";
 
 export async function openAiHelper(userId: string) {
   //Check if the App instance has an openai key
-  const openAiKey = await prismadb.systemServices.findFirst({
+  const openAiKey = await prismadb.systemService.findFirst({
     where: {
       name: "openAiKey",
     },

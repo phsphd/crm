@@ -31,7 +31,7 @@ const OpenAiCard = async () => {
     //console.log(parsed.serviceKey, "serviceKey");
 
     if (!parsed.id) {
-      await prismadb.systemServices.create({
+      await prismadb.systemService.create({
         data: {
           v: 0,
           name: "openAiKey",
@@ -40,7 +40,7 @@ const OpenAiCard = async () => {
       });
       revalidatePath("/admin");
     } else {
-      await prismadb.systemServices.update({
+      await prismadb.systemService.update({
         where: {
           id: parsed.id,
         },
@@ -52,7 +52,7 @@ const OpenAiCard = async () => {
     }
   };
 
-  const openAi_key = await prismadb.systemServices.findFirst({
+  const openAi_key = await prismadb.systemService.findFirst({
     where: {
       name: "openAiKey",
     },

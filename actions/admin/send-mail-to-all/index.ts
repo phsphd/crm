@@ -52,7 +52,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
     //For each user, send mail
     for (const user of users) {
-      const resendKey = await prismadb.systemServices.findFirst({
+      const resendKey = await prismadb.systemService.findFirst({
         where: {
           name: "resend_smtp",
         },

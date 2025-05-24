@@ -16,7 +16,7 @@ const ProfilePage = async () => {
     },
   });
 
-  const openAiKeySystem = await prismadb.systemServices.findFirst({
+  const openAiKeySystem = await prismadb.systemService.findFirst({
     where: {
       name: "openAiKey",
     },

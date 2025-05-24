@@ -302,3 +302,14 @@ model Document {
   userId      String
   user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+// System Services/Settings for storing configuration
+model SystemService {
+  id          String   @id @default(cuid())
+  name        String   @unique // e.g., "resend_smtp", "openai", etc.
+  value       String?  // The API key or configuration value
+  isActive    Boolean  @default(true)
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

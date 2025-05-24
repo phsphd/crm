@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { prismadb } from "./prisma";
 
 export default async function resendHelper() {
-  const resendKey = await prismadb.systemServices.findFirst({
+  const resendKey = await prismadb.systemService.findFirst({
     where: {
       name: "resend_smtp",
     },

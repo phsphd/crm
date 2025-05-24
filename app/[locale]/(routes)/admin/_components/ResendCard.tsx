@@ -31,7 +31,7 @@ const ResendCard = async () => {
     //console.log(parsed.serviceKey, "serviceKey");
 
     if (!parsed.id) {
-      await prismadb.systemServices.create({
+      await prismadb.systemService.create({
         data: {
           v: 0,
           name: "resend_smtp",
@@ -40,7 +40,7 @@ const ResendCard = async () => {
       });
       revalidatePath("/admin");
     } else {
-      await prismadb.systemServices.update({
+      await prismadb.systemService.update({
         where: {
           id: parsed.id,
         },
@@ -52,7 +52,7 @@ const ResendCard = async () => {
     }
   };
 
-  const resend_key = await prismadb.systemServices.findFirst({
+  const resend_key = await prismadb.systemService.findFirst({
     where: {
       name: "resend_smtp",
     },
