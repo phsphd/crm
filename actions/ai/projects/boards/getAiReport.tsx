@@ -21,9 +21,9 @@ export async function getAiReport(session: any, boardId: string) {
 
   if (!user) return { message: "No user found" };
 
-  const boardData = await prismadb.sections.findMany({
+  const boardData = await prismadb.section.findMany({
     where: {
-      board: boardId,
+      boardId: boardId, 
     },
     include: {
       tasks: {

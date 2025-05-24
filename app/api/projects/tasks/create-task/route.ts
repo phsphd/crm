@@ -39,7 +39,7 @@ export async function POST(req: Request) {
 
   try {
     //Get first section from board where position is smallest
-    const sectionId = await prismadb.sections.findFirst({
+    const sectionId = await prismadb.section.findFirst({
       where: {
         board: board,
       },

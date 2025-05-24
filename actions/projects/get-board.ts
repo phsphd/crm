@@ -14,7 +14,7 @@ export const getBoard = async (id: string) => {
     },
   });
 
-  const sections = await prismadb.sections.findMany({
+  const sections = await prismadb.section.findMany({
     where: {
       board: id,
     },

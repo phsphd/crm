@@ -14,7 +14,7 @@ export async function PUT(req: Request, props: { params: Promise<{ sectionId: st
   const { newTitle } = body;
 
   try {
-    await prismadb.sections.update({
+    await prismadb.section.update({
       where: {
         id: sectionId,
       },

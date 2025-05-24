@@ -20,14 +20,14 @@ export async function POST(req: Request, props: { params: Promise<{ boardId: str
 
   try {
     console.log(boardId, "boardId");
-    const sectionPosition = await prismadb.sections.count({
+    const sectionPosition = await prismadb.section.count({
       where: {
         board: boardId,
       },
     });
 
     console.log(sectionPosition, "sectionPosition");
-    const newSection = await prismadb.sections.create({
+    const newSection = await prismadb.section.create({
       data: {
         v: 0,
         board: boardId,

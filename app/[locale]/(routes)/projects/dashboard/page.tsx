@@ -7,7 +7,7 @@ import { getBoards } from "@/actions/projects/get-boards";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getSections } from "@/actions/projects/get-sections";
-import { Sections } from "@prisma/client";
+import { Section } from "@prisma/client";
 
 const ProjectDashboard = async () => {
   const session = await getServerSession(authOptions);

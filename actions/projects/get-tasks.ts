@@ -33,7 +33,7 @@ export const getTasks = async () => {
   if (!userId) return null;
 
   //Filtering tasks by section and board
-  const sections = await prismadb.sections.findMany({
+  const sections = await prismadb.section.findMany({
     where: {
       OR: boards.map((board: any) => {
         return {
@@ -45,7 +45,7 @@ export const getTasks = async () => {
 
   const data = await prismadb.tasks.findMany({
     where: {
-      OR: sections.map((section: any) => {
+      OR: section.map((section: any) => {
         return {
           section: section.id,
         };

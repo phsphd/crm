@@ -21,7 +21,7 @@ export async function DELETE(req: Request, props: { params: Promise<{ sectionId:
       },
     });
     console.log("All section tasks deleted", tasks);
-    await prismadb.sections.delete({
+    await prismadb.section.delete({
       where: {
         id: sectionId,
       },

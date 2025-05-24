@@ -9,7 +9,7 @@ export const getKanbanData = async (boardId: string) => {
   //console.log(board, "getBoard - board");
 
   //Select sections from board with boardId, tasks are included
-  let sections = await prismadb.sections.findMany({
+  let sections = await prismadb.section.findMany({
     where: {
       board: boardId,
     },

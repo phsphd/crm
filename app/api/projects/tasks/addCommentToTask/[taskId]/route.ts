@@ -48,7 +48,7 @@ export async function POST(
     }
 
     //TODO: this can be done in a single query if there will be boardID in task
-    const section = await prismadb.sections.findUnique({
+    const section = await prismadb.section.findUnique({
       where: { id: task.section },
     });
 

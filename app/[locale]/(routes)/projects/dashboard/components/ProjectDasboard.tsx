@@ -27,7 +27,7 @@ import {
 import { CheckSquare, Eye, MessagesSquare, Pencil } from "lucide-react";
 import UpdateTaskDialog from "../../dialogs/UpdateTask";
 import { Button } from "@/components/ui/button";
-import { Sections } from "@prisma/client";
+import { Section } from "@prisma/client";
 import { ElementRef, useRef, useState } from "react";
 import FormSheet from "@/components/sheets/form-sheet";
 
@@ -174,7 +174,7 @@ const ProjectDashboardCockpit = ({
                   boards={boards}
                   boardId={
                     sections.find(
-                      (section: Sections) => section.id === task.section
+                      (section: Section) => section.id === task.section
                     )?.board
                   }
                   initialData={task}

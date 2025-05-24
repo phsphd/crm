@@ -18,7 +18,7 @@ export async function DELETE(req: Request, props: { params: Promise<{ projectId:
   const boardId = params.projectId;
 
   try {
-    const sections = await prismadb.sections.findMany({
+    const sections = await prismadb.section.findMany({
       where: {
         board: boardId,
       },
@@ -31,7 +31,7 @@ export async function DELETE(req: Request, props: { params: Promise<{ projectId:
         },
       });
     }
-    await prismadb.sections.deleteMany({
+    await prismadb.section.deleteMany({
       where: {
         board: boardId,
       },

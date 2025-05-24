@@ -31,7 +31,7 @@ export async function DELETE(req: Request) {
       }
     }
 
-    await prismadb.sections.delete({
+    await prismadb.section.delete({
       where: {
         id: id,
       },

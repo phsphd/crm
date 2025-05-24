@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       },
     });
 
-    await prismadb.sections.create({
+    await prismadb.section.create({
       data: {
         v: 0,
         board: newBoard.id,
