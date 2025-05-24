@@ -27,7 +27,7 @@ export async function PUT(req: Request) {
   }
 
   try {
-    await prismadb.users.update({
+    await prismadb.user.update({
       where: {
         id: session.user.id,
       },

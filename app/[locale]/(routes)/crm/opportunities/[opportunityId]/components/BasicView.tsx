@@ -32,7 +32,7 @@ interface OppsViewProps {
 
 export async function BasicView({ data }: OppsViewProps) {
   //console.log(data, "data");
-  const users = await prismadb.users.findMany();
+  const users = await prismadb.user.findMany();
   if (!data) return <div>Opportunity not found</div>;
   return (
     <Card>

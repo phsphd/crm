@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     });
 
     if (assigned_to !== userId) {
-      const notifyRecipient = await prismadb.users.findFirst({
+      const notifyRecipient = await prismadb.user.findFirst({
         where: {
           id: assigned_to,
         },
@@ -142,7 +142,7 @@ export async function PUT(req: Request) {
     });
 
     /* if (assigned_to !== userId) {
-      const notifyRecipient = await prismadb.users.findFirst({
+      const notifyRecipient = await prismadb.user.findFirst({
         where: {
           id: assigned_to,
         },
@@ -180,7 +180,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    const users = await prismadb.users.findMany({});
+    const users = await prismadb.user.findMany({});
     const accounts = await prismadb.crm_Accounts.findMany({});
     const contacts = await prismadb.crm_Contacts.findMany({});
     const saleTypes = await prismadb.crm_Opportunities_Type.findMany({});

@@ -101,7 +101,7 @@ export async function PUT(req: Request, props: { params: Promise<{ taskId: strin
       console.log("User property:", user);
       console.log("Board property:", boardId);
       try {
-        const notifyRecipient = await prismadb.users.findUnique({
+        const notifyRecipient = await prismadb.user.findUnique({
           where: { id: user },
         });
 

@@ -17,7 +17,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const user = await prismadb.users.findUnique({
+  const user = await prismadb.user.findUnique({
     where: {
       email: session?.user?.email,
     },

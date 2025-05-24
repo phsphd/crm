@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     });
 
     if (assigned_to !== userId) {
-      const notifyRecipient = await prismadb.users.findFirst({
+      const notifyRecipient = await prismadb.user.findFirst({
         where: {
           id: assigned_to,
         },
@@ -146,7 +146,7 @@ export async function PUT(req: Request) {
     });
 
     if (assigned_to !== userId) {
-      const notifyRecipient = await prismadb.users.findFirst({
+      const notifyRecipient = await prismadb.user.findFirst({
         where: {
           id: assigned_to,
         },

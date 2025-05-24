@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     //Notification to user who is not a task creator or Account watcher
     if (user !== session.user.id) {
       try {
-        const notifyRecipient = await prismadb.users.findUnique({
+        const notifyRecipient = await prismadb.user.findUnique({
           where: { id: user },
         });
 
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
 
     //Notification to user who are account watchers
     try {
-      const emailRecipients = await prismadb.users.findMany({
+      const emailRecipients = await prismadb.user.findMany({
         where: {
           //Send to all users watching the board except the user who created the comment
           id: {
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
       });
       //Create notifications for every user watching the specific account except the user who created the task
       for (const userID of emailRecipients) {
-        const user = await prismadb.users.findUnique({
+        const user = await prismadb.user.findUnique({
           where: {
             id: userID.id,
           },

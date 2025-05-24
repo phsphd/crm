@@ -2,7 +2,7 @@ import { prismadb } from "@/lib/prisma";
 
 //Get all users  for admin module
 export const getUsers = async () => {
-  const data = await prismadb.users.findMany({
+  const data = await prismadb.user.findMany({
     orderBy: {
       created_on: "desc",
     },
@@ -12,7 +12,7 @@ export const getUsers = async () => {
 
 //Get active users for Selects in app etc
 export const getActiveUsers = async () => {
-  const data = await prismadb.users.findMany({
+  const data = await prismadb.user.findMany({
     orderBy: {
       created_on: "desc",
     },
@@ -25,7 +25,7 @@ export const getActiveUsers = async () => {
 
 //Get new users by month for chart
 export const getUsersByMonthAndYear = async (year: number) => {
-  const users = await prismadb.users.findMany({
+  const users = await prismadb.user.findMany({
     select: {
       created_on: true,
     },
@@ -60,7 +60,7 @@ export const getUsersByMonthAndYear = async (year: number) => {
 
 //Get new users by month for chart
 export const getUsersByMonth = async () => {
-  const users = await prismadb.users.findMany({
+  const users = await prismadb.user.findMany({
     select: {
       created_on: true,
     },
@@ -91,7 +91,7 @@ export const getUsersByMonth = async () => {
 };
 
 export const getUsersCountOverall = async () => {
-  const users = await prismadb.users.findMany({
+  const users = await prismadb.user.findMany({
     select: {
       created_on: true,
     },

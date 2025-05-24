@@ -13,7 +13,7 @@ export async function getAiReport(session: any, boardId: string) {
   */
   const resend = await resendHelper();
 
-  const user = await prismadb.users.findUnique({
+  const user = await prismadb.user.findUnique({
     where: {
       id: session.user.id,
     },

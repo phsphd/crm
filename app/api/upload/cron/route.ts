@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
     console.log("Annotation ID:", rossumAnnotationId);
     //Save the data to the database
 
-    const admin = await prismadb.users.findMany({
+    const admin = await prismadb.user.findMany({
       where: {
         is_admin: true,
       },

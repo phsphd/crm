@@ -79,7 +79,7 @@ export async function POST(
         },
       });
 
-      const emailRecipients = await prismadb.users.findMany({
+      const emailRecipients = await prismadb.user.findMany({
         where: {
           //Send to all users watching the board except the user who created the comment
           id: {
@@ -93,7 +93,7 @@ export async function POST(
 
       // Add the task creator to the email recipients
       if (task.createdBy) {
-        const taskCreator = await prismadb.users.findUnique({
+        const taskCreator = await prismadb.user.findUnique({
           where: { id: task.createdBy },
         });
         if (taskCreator) {
@@ -103,7 +103,7 @@ export async function POST(
 
       //Create notifications for every user watching the board except the user who created the comment
       for (const userID of emailRecipients) {
-        const user = await prismadb.users.findUnique({
+        const user = await prismadb.user.findUnique({
           where: {
             id: userID.id,
           },

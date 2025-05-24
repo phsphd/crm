@@ -1,7 +1,7 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getAllCrmData = async () => {
-  const users = await prismadb.users.findMany({
+  const users = await prismadb.user.findMany({
     where: {
       userStatus: "ACTIVE",
     },

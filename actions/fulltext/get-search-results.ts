@@ -39,7 +39,7 @@ export const getSearch = async (search: string) => {
   });
 
   //Search in local user database
-  const resultsUser = await prismadb.users.findMany({
+  const resultsUser = await prismadb.user.findMany({
     where: {
       OR: [
         { email: { contains: search, mode: "insensitive" } },

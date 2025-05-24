@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 
 const PendingPage = async () => {
-  const adminUsers: Users[] = await prismadb.users.findMany({
+  const adminUsers: Users[] = await prismadb.user.findMany({
     where: {
       is_admin: true,
       userStatus: "ACTIVE",

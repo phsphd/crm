@@ -4,7 +4,7 @@ import { prismadb } from "./prisma";
 import sendEmail from "./sendmail";
 
 export async function newUserNotify(newUser: Users) {
-  const admins = await prismadb.users.findMany({
+  const admins = await prismadb.user.findMany({
     where: {
       is_admin: true,
     },

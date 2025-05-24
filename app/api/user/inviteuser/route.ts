@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     }
 
     //Check if user already exists in local database
-    const checkexisting = await prismadb.users.findFirst({
+    const checkexisting = await prismadb.user.findFirst({
       where: {
         email: email,
       },
@@ -67,7 +67,7 @@ export async function POST(req: Request) {
       );
     } else {
       try {
-        const user = await prismadb.users.create({
+        const user = await prismadb.user.create({
           data: {
             name,
             username: "",

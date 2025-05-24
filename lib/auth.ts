@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email or password is missing");
         }
 
-        const user = await prismadb.users.findFirst({
+        const user = await prismadb.user.findFirst({
           where: {
             email: credentials.email,
           },
@@ -83,7 +83,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     //TODO: fix this any
     async session({ token, session }: any) {
-      const user = await prismadb.users.findFirst({
+      const user = await prismadb.user.findFirst({
         where: {
           email: token.email,
         },
@@ -91,7 +91,7 @@ export const authOptions: NextAuthOptions = {
 
       if (!user) {
         try {
-          const newUser = await prismadb.users.create({
+          const newUser = await prismadb.user.create({
             data: {
               email: token.email,
               name: token.name,
@@ -123,7 +123,7 @@ export const authOptions: NextAuthOptions = {
           return console.log(error);
         }
       } else {
-        await prismadb.users.update({
+        await prismadb.user.update({
           where: {
             id: user.id,
           },

@@ -101,7 +101,7 @@ export async function POST(req: Request, props: { params: Promise<{ boardId: str
       //Notification to user who is not a task creator
       if (user !== session.user.id) {
         try {
-          const notifyRecipient = await prismadb.users.findUnique({
+          const notifyRecipient = await prismadb.user.findUnique({
             where: { id: user },
           });
 

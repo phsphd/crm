@@ -18,7 +18,7 @@ export async function getUserAiTasks(session: any) {
 
   let prompt = "";
 
-  const user = await prismadb.users.findUnique({
+  const user = await prismadb.user.findUnique({
     where: {
       id: session.user.id,
     },
