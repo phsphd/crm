@@ -1,0 +1,84 @@
+.env file:
+bash# Old MongoDB connection
+# DATABASE_URL="mongodb+srv://username:password@cluster0.xxx.mongodb.net/nextcrm-app"
+
+# New PostgreSQL connection
+DATABASE_URL="postgresql://username:password@localhost:5432/nextcrm-app"
+
+Create new prisma/schema.prisma
+
+pnpm prisma generate
+
+# Create and apply migration
+pnpm prisma migrate dev --name init
+
+# Seed database (if you have seed data)
+pnpm prisma db seed
+npx tsc ./prisma/seeds/seed.ts
+node ./prisma/seeds/seed.js
+pnpm run dev
+
+
+Step 1: Create Google OAuth Credentials
+
+Go to Google Cloud Console: https://console.cloud.google.com/
+Create a new project (or select existing one)
+Enable Google+ API:
+
+Go to "APIs & Services" → "Library"
+Search for "Google+ API"
+Click "Enable"
+
+
+Create OAuth 2.0 credentials:
+
+Go to "APIs & Services" → "Credentials"
+Click "Create Credentials" → "OAuth client ID"
+Choose "Web application"
+Add these URLs:
+
+Authorized JavaScript origins: http://localhost:3000
+Authorized redirect URIs: http://localhost:3000/api/auth/callback/google
+
+
+
+
+
+Step 2: Add Environment Variables
+Add these to your .env.local file:
+
+# .env.local
+
+# NextAuth Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key-here-make-it-long-and-random
+
+# Google OAuth
+GOOGLE_ID=your-google-client-id-here
+GOOGLE_SECRET=your-google-client-secret-here
+
+# Database (if not already set)
+DATABASE_URL="postgresql://username:password@localhost:5432/nextcrm-app"
+
+# Other environment variables from the original project
+UPLOADTHING_SECRET=your-uploadthing-secret
+UPLOADTHING_APP_ID=your-uploadthing-app-id
+
+# Email configuration (if using)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+
+# OpenAI (if using AI features)
+OPENAI_API_KEY=your-openai-api-key
+
+# Rossum (if using invoice parsing)
+ROSSUM_USERNAME=your-rossum-username
+ROSSUM_PASSWORD=your-rossum-password
+Step 3: Generate NEXTAUTH_SECRET
+Generate a secure secret key:
+bash# Generate a random secret
+openssl rand -base64 32
+
+# Or use this online tool: https://generate-secret.vercel.app/32
