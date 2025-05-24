@@ -20,22 +20,22 @@ const ResendCard = async () => {
     "use server";
     const schema = z.object({
       id: z.string(),
-      serviceKey: z.string(),
+      value: z.string(),
     });
     const parsed = schema.parse({
       id: formData.get("id"),
-      serviceKey: formData.get("serviceKey"),
+      value: formData.get("value"),
     });
 
     //console.log(parsed.id, "id");
-    //console.log(parsed.serviceKey, "serviceKey");
+    //console.log(parsed.value, "value");
 
     if (!parsed.id) {
       await prismadb.systemService.create({
         data: {
           v: 0,
           name: "resend_smtp",
-          serviceKey: parsed.serviceKey,
+          value: parsed.value,
         },
       });
       revalidatePath("/admin");
@@ -45,7 +45,7 @@ const ResendCard = async () => {
           id: parsed.id,
         },
         data: {
-          serviceKey: parsed.serviceKey,
+          value: parsed.value,
         },
       });
       revalidatePath("/admin");
@@ -76,9 +76,9 @@ const ResendCard = async () => {
           </p>
           <p>API key from DB:</p>
           <p>
-            {resend_key?.serviceKey ? (
+            {resend_key?.value ? (
               <CopyKeyComponent
-                keyValue={resend_key?.serviceKey}
+                keyValue={resend_key?.value}
                 message="Resend - API Key"
               />
             ) : (
@@ -91,7 +91,7 @@ const ResendCard = async () => {
         <form action={setSMTP}>
           <div>
             <input type="hidden" name="id" value={resend_key?.id} />
-            <Input type="text" name="serviceKey" placeholder="Your API key" />
+            <Input type="text" name="value" placeholder="Your API key" />
           </div>
           <div className="flex justify-end pt-2 gap-2">
             <Button type={"reset"}>Reset</Button>

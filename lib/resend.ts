@@ -9,7 +9,7 @@ export default async function resendHelper() {
   });
 
   const resend = new Resend(
-    process.env.RESEND_API_KEY || resendKey?.serviceKey!
+    process.env.RESEND_API_KEY || resendKey?.value!
   );
 
   return resend;

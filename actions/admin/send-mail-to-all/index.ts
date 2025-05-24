@@ -58,7 +58,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         },
       });
 
-      if (!resendKey?.serviceKey || !process.env.RESEND_API_KEY) {
+      if (!resendKey?.value || !process.env.RESEND_API_KEY) {
         const emailHtml = render(
           MessageToAllUsers({
             title: title,

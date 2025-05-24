@@ -19,7 +19,7 @@ export async function openAiHelper(userId: string) {
     },
   });
 
-  let apiKey = openAiKey?.serviceKey || userOpenAiKey?.api_key;
+  let apiKey = openAiKey?.value || userOpenAiKey?.api_key;
 
   if (!apiKey) {
     if (!process.env.OPENAI_API_KEY) {

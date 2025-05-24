@@ -20,22 +20,22 @@ const OpenAiCard = async () => {
     "use server";
     const schema = z.object({
       id: z.string(),
-      serviceKey: z.string(),
+      value: z.string(),
     });
     const parsed = schema.parse({
       id: formData.get("id"),
-      serviceKey: formData.get("serviceKey"),
+      value: formData.get("value"),
     });
 
     //console.log(parsed.id, "id");
-    //console.log(parsed.serviceKey, "serviceKey");
+    //console.log(parsed.value, "value");
 
     if (!parsed.id) {
       await prismadb.systemService.create({
         data: {
           v: 0,
           name: "openAiKey",
-          serviceKey: parsed.serviceKey,
+          value: parsed.value,
         },
       });
       revalidatePath("/admin");
@@ -45,7 +45,7 @@ const OpenAiCard = async () => {
           id: parsed.id,
         },
         data: {
-          serviceKey: parsed.serviceKey,
+          value: parsed.value,
         },
       });
       revalidatePath("/admin");
@@ -76,9 +76,9 @@ const OpenAiCard = async () => {
             )}
           </p>
           <p>API key from DB:</p>
-          {openAi_key?.serviceKey ? (
+          {openAi_key?.value ? (
             <CopyKeyComponent
-              keyValue={openAi_key.serviceKey}
+              keyValue={openAi_key.value}
               message="OpenAi - API Key"
             />
           ) : (
@@ -90,7 +90,7 @@ const OpenAiCard = async () => {
         <form action={setOpenAiKey}>
           <div>
             <input type="hidden" name="id" value={openAi_key?.id} />
-            <Input type="text" name="serviceKey" placeholder="Your API key" />
+            <Input type="text" name="value" placeholder="Your API key" />
           </div>
           <div className="flex justify-end pt-2 gap-2">
             <Button type={"reset"}>Reset</Button>
