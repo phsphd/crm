@@ -8,7 +8,7 @@ export async function setInactiveOpportunity(id: string) {
     console.log("Opportunity id is required");
   }
   try {
-    const result = await prismadb.crm_Opportunities.update({
+    const result = await prismadb.opportunity.update({
       where: {
         id,
       },

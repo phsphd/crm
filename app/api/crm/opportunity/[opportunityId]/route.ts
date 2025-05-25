@@ -21,7 +21,7 @@ export async function PUT(req: Request, props: { params: Promise<{ opportunityId
   const { destination } = body;
 
   try {
-    await prismadb.crm_Opportunities.update({
+    await prismadb.opportunity.update({
       where: {
         id: params.opportunityId,
       },
@@ -30,7 +30,7 @@ export async function PUT(req: Request, props: { params: Promise<{ opportunityId
       },
     });
 
-    const data = await prismadb.crm_Opportunities.findMany({
+    const data = await prismadb.opportunity.findMany({
       include: {
         assigned_to_user: {
           select: {
@@ -65,7 +65,7 @@ export async function DELETE(req: Request, props: { params: Promise<{ opportunit
   }
 
   try {
-    await prismadb.crm_Opportunities.delete({
+    await prismadb.opportunity.delete({
       where: {
         id: params.opportunityId,
       },

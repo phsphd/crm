@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 
 import { useRouter } from "next/navigation";
 
-import { crm_Accounts, Users } from "@prisma/client";
+import { Company, User } from "@prisma/client";
 
 import { useAction } from "@/hooks/use-action";
 
@@ -29,10 +29,9 @@ const UpdateContractForm = ({
 }: {
   onOpen: boolean;
   setOpen: (open: boolean) => void;
-  users: Users[];
-  accounts: crm_Accounts[];
-  //TODO: fix type for data
-  data: any;
+  users: User[];           // was Users[]
+  accounts: Company[];     // was crm_Accounts[]
+  data: Contract;          // was any (assuming this is contract data)
 }) => {
   const router = useRouter();
 

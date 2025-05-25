@@ -37,23 +37,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import {
-  crm_Accounts,
-  crm_Contacts,
-  crm_Opportunities_Sales_Stages,
-  crm_Opportunities_Type,
-  crm_campaigns,
+  Company,           // was crm_Accounts
+  Contact,           // was crm_Contacts
+  SalesStage,        // was crm_Opportunities_Sales_Stages
+  OpportunityType,   // was crm_Opportunities_Type
+  Campaign,          // was crm_campaigns
 } from "@prisma/client";
 
 import useDebounce from "@/hooks/useDebounce";
 
-//TODO: fix all the types
 type NewTaskFormProps = {
-  users: any[];
-  accounts: crm_Accounts[];
-  contacts: crm_Contacts[];
-  salesType: crm_Opportunities_Type[];
-  saleStages: crm_Opportunities_Sales_Stages[];
-  campaigns: crm_campaigns[];
+  users: User[];                    // Fixed from any[]
+  accounts: Company[];              // was crm_Accounts[]
+  contacts: Contact[];              // was crm_Contacts[]
+  salesType: OpportunityType[];     // was crm_Opportunities_Type[]
+  saleStages: SalesStage[];         // was crm_Opportunities_Sales_Stages[]
+  campaigns: Campaign[];            // was crm_campaigns[]
   selectedStage?: string;
   accountId?: string;
   onDialogClose: () => void;
@@ -94,11 +93,11 @@ export function NewOpportunityForm({
 
   const filteredContacts = contacts.filter(
     (contact) =>
-      contact.last_name
+      contact.lastName
         .toLowerCase()
         .includes(debouncedContactValue.toLowerCase()) ||
-      (contact.first_name &&
-        contact.first_name
+      (contact.firstName &&
+        contact.firstName
           .toLowerCase()
           .includes(debouncedContactValue.toLowerCase()))
   );
@@ -472,7 +471,7 @@ export function NewOpportunityForm({
                           />
                           {filteredContacts.map((contact) => (
                             <SelectItem key={contact.id} value={contact.id}>
-                              {contact.first_name + " " + contact.last_name}
+                              {contact.firstName + " " + contact.lastName}
                             </SelectItem>
                           ))}
                         </SelectContent>

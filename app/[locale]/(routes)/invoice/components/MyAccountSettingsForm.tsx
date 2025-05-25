@@ -33,7 +33,7 @@ import { Textarea } from "@/components/ui/textarea";
 import fetcher from "@/lib/fetcher";
 import useSWR from "swr";
 import SuspenseLoading from "@/components/loadings/suspense";
-import { MyAccount, crm_Accounts } from "@prisma/client";
+import { MyAccount, Company } from "@prisma/client";
 import { init } from "next/dist/compiled/@vercel/og/satori";
 import { Switch } from "@/components/ui/switch";
 

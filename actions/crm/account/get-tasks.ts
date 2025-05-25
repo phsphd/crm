@@ -1,12 +1,18 @@
 import { prismadb } from "@/lib/prisma";
 
-export const getAccountsTasks = async (accountId: string) => {
-  const data = await prismadb.crm_Accounts_Tasks.findMany({
+export const getAccountsTasks = async (accountId: string) => {  
+  const data = await prismadb.task.findMany({
     where: {
-      account: accountId,
+      accountId: accountId,
     },
     include: {
-      assigned_user: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      account: {
         select: {
           id: true,
           name: true,

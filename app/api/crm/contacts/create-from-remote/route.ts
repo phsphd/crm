@@ -29,10 +29,10 @@ export async function POST(req: Request) {
   }
 
   try {
-    await prismadb.crm_Contacts.create({
+    await prismadb.contact.create({
       data: {
-        first_name: name,
-        last_name: surname,
+        firstName: name,
+        lastName: surname,
         email,
         mobile_phone: phone,
         type: "Prospect",

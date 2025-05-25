@@ -21,21 +21,21 @@ export async function getAiReport(session: any, boardId: string) {
 
   if (!user) return { message: "No user found" };
 
-  const boardData = await prismadb.section.findMany({
-    where: {
-      boardId: boardId, 
-    },
-    include: {
-      tasks: {
-        select: {
-          title: true,
-          content: true,
-          createdAt: true,
-          dueDateAt: true,
-        },
+const boardData = await prismadb.section.findMany({
+  where: {
+    boardId: boardId, 
+  },
+  include: {
+    tasks: {
+      select: {
+        title: true,
+        description: true,  // ✅ Fixed
+        createdAt: true,
+        dueDate: true,      // ✅ Fixed
       },
     },
-  });
+  },
+});
 
   //console.log(JSON.stringify(boardData, null, 2), "boardData");
 

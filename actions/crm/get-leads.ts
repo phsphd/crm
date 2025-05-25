@@ -1,7 +1,7 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getLeads = async () => {
-  const data = await prismadb.crm_Leads.findMany({
+  const data = await prismadb.lead.findMany({
     include: {
       assigned_to_user: {
         select: {

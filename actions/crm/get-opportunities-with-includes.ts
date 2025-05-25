@@ -3,7 +3,7 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getOpportunitiesFull = async () => {
-  const data = await prismadb.crm_Opportunities.findMany({
+  const data = await prismadb.opportunity.findMany({
     include: {
       assigned_account: {
         select: {
@@ -22,7 +22,7 @@ export const getOpportunitiesFull = async () => {
       },
     },
     orderBy: {
-      created_on: "desc",
+      createdAt: "desc",
     },
   });
 

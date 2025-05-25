@@ -40,7 +40,7 @@ export async function BasicView({ data }: OppsViewProps) {
           <div className="flex w-full justify-between">
             <div>
               <CardTitle>
-                {data.first_name} {data.last_name}
+                {data.firstName} {data.lastName}
               </CardTitle>
               <CardDescription>ID:{data.id}</CardDescription>
             </div>

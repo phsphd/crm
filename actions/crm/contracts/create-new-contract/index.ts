@@ -49,7 +49,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   try {
-    const result = await prismadb.crm_Contracts.create({
+    const result = await prismadb.contract.create({
       data: {
         v: 0,
         title,
@@ -63,6 +63,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         account: account || undefined,
         assigned_to: assigned_to || undefined,
         createdBy: user.id,
+        userId: user.id,
       },
     });
     //console.log(result, "result");

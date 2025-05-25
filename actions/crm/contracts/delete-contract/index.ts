@@ -38,7 +38,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   try {
-    const result = await prismadb.crm_Contracts.delete({
+    const result = await prismadb.contract.delete({
       where: {
         id: id,
       },

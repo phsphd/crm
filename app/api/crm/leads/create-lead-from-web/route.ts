@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       );
     }
     try {
-      await prismadb.crm_Leads.create({
+      await prismadb.lead.create({
         data: {
           v: 1,
           firstName,

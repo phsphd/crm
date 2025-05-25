@@ -18,7 +18,7 @@ export async function DELETE(req: Request, props: { params: Promise<{ contactId:
   }
 
   try {
-    await prismadb.crm_Contacts.delete({
+    await prismadb.contact.delete({
       where: {
         id: params.contactId,
       },

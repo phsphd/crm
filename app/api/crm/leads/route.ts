@@ -19,8 +19,8 @@ export async function POST(req: Request) {
     }
 
     const {
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       company,
       jobTitle,
       email,
@@ -35,13 +35,13 @@ export async function POST(req: Request) {
 
     //console.log(req.body, "req.body");
 
-    const newLead = await prismadb.crm_Leads.create({
+    const newLead = await prismadb.lead.create({
       data: {
         v: 1,
         createdBy: userId,
         updatedBy: userId,
-        firstName: first_name,
-        lastName: last_name,
+        firstName: firstName,
+        lastName: lastName,
         company,
         jobTitle,
         email,
@@ -73,12 +73,12 @@ export async function POST(req: Request) {
         to: notifyRecipient.email || "info@softbase.cz",
         subject:
           notifyRecipient.userLanguage === "en"
-            ? `New lead ${first_name} ${last_name} has been added to the system and assigned to you.`
-            : `Nová příležitost ${first_name} ${last_name} byla přidána do systému a přidělena vám.`,
+            ? `New lead ${firstName} ${lastName} has been added to the system and assigned to you.`
+            : `Nová příležitost ${firstName} ${lastName} byla přidána do systému a přidělena vám.`,
         text:
           notifyRecipient.userLanguage === "en"
-            ? `New lead ${first_name} ${last_name} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newLead.id}`
-            : `Nová příležitost ${first_name} ${last_name} byla přidána do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newLead.id}`,
+            ? `New lead ${firstName} ${lastName} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newLead.id}`
+            : `Nová příležitost ${firstName} ${lastName} byla přidána do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newLead.id}`,
       });
     }
 
@@ -121,7 +121,7 @@ export async function PUT(req: Request) {
       type,
     } = body;
 
-    const updatedLead = await prismadb.crm_Leads.update({
+    const updatedLead = await prismadb.lead.update({
       where: {
         id,
       },

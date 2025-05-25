@@ -17,7 +17,7 @@ export async function POST(req: Request, props: { params: Promise<{ accountId: s
   const accountId = params.accountId;
 
   try {
-    await prismadb.crm_Accounts.update({
+    await prismadb.company.update({
       where: {
         id: accountId,
       },

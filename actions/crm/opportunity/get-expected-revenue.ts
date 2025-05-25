@@ -1,7 +1,7 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getExpectedRevenue = async () => {
-  const activeOpportunities = await prismadb.crm_Opportunities.findMany({
+  const activeOpportunities = await prismadb.opportunity.findMany({
     where: {
       status: "ACTIVE",
     },

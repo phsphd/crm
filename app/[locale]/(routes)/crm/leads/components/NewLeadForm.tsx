@@ -50,8 +50,8 @@ export function NewLeadForm({ users, accounts }: NewTaskFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formSchema = z.object({
-    first_name: z.string(),
-    last_name: z.string().min(3).max(30).nonempty(),
+    firstName: z.string(),
+    lastName: z.string().min(3).max(30).nonempty(),
     company: z.string().optional(),
     jobTitle: z.string().optional(),
     email: z.string().email().optional(),
@@ -87,8 +87,8 @@ export function NewLeadForm({ users, accounts }: NewTaskFormProps) {
     } finally {
       setIsLoading(false);
       form.reset({
-        first_name: "",
-        last_name: "",
+        firstName: "",
+        lastName: "",
         company: "",
         jobTitle: "",
         email: "",

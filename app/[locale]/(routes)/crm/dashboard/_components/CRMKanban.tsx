@@ -8,8 +8,8 @@ import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import {
-  crm_Opportunities,
-  crm_Opportunities_Sales_Stages,
+  Opportunity,        // was crm_Opportunities
+  SalesStage,         // was crm_Opportunities_Sales_Stages
 } from "@prisma/client";
 
 import { DotsHorizontalIcon, PlusCircledIcon } from "@radix-ui/react-icons";
@@ -34,11 +34,10 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-
 interface CRMKanbanProps {
-  salesStages: crm_Opportunities_Sales_Stages[];
-  opportunities: crm_Opportunities[];
-  crmData: any;
+  salesStages: SalesStage[];        // was crm_Opportunities_Sales_Stages[]
+  opportunities: Opportunity[];     // was crm_Opportunities[]
+  crmData: any;                     // Consider typing this better if possible
 }
 
 const CRMKanban = ({
@@ -112,7 +111,7 @@ const CRMKanban = ({
     // If start is the same as end, we're in the same column
   };
 
-  const onThumbsUp = async (opportunity: crm_Opportunities) => {
+  const onThumbsUp = async (opportunity: Opportunity) => {
     // Implement thumbs up logic
     alert("Thumbs up - not implemented yet");
   };

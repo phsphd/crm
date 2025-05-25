@@ -4,7 +4,7 @@ export const getSearch = async (search: string) => {
   //TODO: This action is now offtopic, because it is not used in the frontend.
 
   //Search in modul CRM (Oppotunities)
-  const resultsCrmOpportunities = await prismadb.crm_Opportunities.findMany({
+  const resultsCrmOpportunities = await prismadb.opportunity.findMany({
     where: {
       OR: [
         { description: { contains: search, mode: "insensitive" } },
@@ -15,7 +15,7 @@ export const getSearch = async (search: string) => {
   });
 
   //Search in modul CRM (Accounts)
-  const resultsCrmAccounts = await prismadb.crm_Accounts.findMany({
+  const resultsCrmAccounts = await prismadb.company.findMany({
     where: {
       OR: [
         { description: { contains: search, mode: "insensitive" } },
@@ -27,11 +27,11 @@ export const getSearch = async (search: string) => {
   });
 
   //Search in modul CRM (Contacts)
-  const resultsCrmContacts = await prismadb.crm_Contacts.findMany({
+  const resultsCrmContacts = await prismadb.contact.findMany({
     where: {
       OR: [
-        { last_name: { contains: search, mode: "insensitive" } },
-        { first_name: { contains: search, mode: "insensitive" } },
+        { lastName: { contains: search, mode: "insensitive" } },
+        { firstName: { contains: search, mode: "insensitive" } },
         { email: { contains: search, mode: "insensitive" } },
         // add more fields as needed
       ],

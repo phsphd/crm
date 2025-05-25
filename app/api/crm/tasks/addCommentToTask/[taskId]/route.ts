@@ -30,7 +30,7 @@ export async function POST(req: Request, props: { params: Promise<{ taskId: stri
   }
 
   try {
-    const task = await prismadb.crm_Accounts_Tasks.findUnique({
+    const task = await prismadb.task.findUnique({
       where: { id: taskId },
     });
 

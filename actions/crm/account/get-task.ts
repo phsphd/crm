@@ -1,12 +1,12 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getCrMTask = async (taskId: string) => {
-  const data = await prismadb.crm_Accounts_Tasks.findFirst({
+  const data = await prismadb.task.findFirst({  // ✅ Fixed: was crm_Accounts_Tasks
     where: {
       id: taskId,
     },
     include: {
-      assigned_user: {
+      user: {  // ✅ Fixed: was assigned_user
         select: {
           id: true,
           name: true,

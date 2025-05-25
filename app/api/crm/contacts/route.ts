@@ -27,8 +27,8 @@ export async function POST(req: Request) {
       description,
       email,
       personal_email,
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       office_phone,
       mobile_phone,
       website,
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
       type,
     } = body;
 
-    const newContact = await prismadb.crm_Contacts.create({
+    const newContact = await prismadb.contact.create({
       data: {
         v: 0,
         createdBy: userId,
@@ -66,8 +66,8 @@ export async function POST(req: Request) {
         description,
         email,
         personal_email,
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         office_phone,
         mobile_phone,
         website,
@@ -99,12 +99,12 @@ export async function POST(req: Request) {
         to: notifyRecipient.email || "info@softbase.cz",
         subject:
           notifyRecipient.userLanguage === "en"
-            ? `New contact ${first_name} ${last_name} has been added to the system and assigned to you.`
-            : `Nový kontakt ${first_name} ${last_name} byla přidána do systému a přidělena vám.`,
+            ? `New contact ${firstName} ${lastName} has been added to the system and assigned to you.`
+            : `Nový kontakt ${firstName} ${lastName} byla přidána do systému a přidělena vám.`,
         text:
           notifyRecipient.userLanguage === "en"
-            ? `New contact ${first_name} ${last_name} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contacts/${newContact.id}`
-            : `Nový kontakt ${first_name} ${last_name} byla přidán do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contact/${newContact.id}`,
+            ? `New contact ${firstName} ${lastName} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contacts/${newContact.id}`
+            : `Nový kontakt ${firstName} ${lastName} byla přidán do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contact/${newContact.id}`,
       });
     }
 
@@ -139,8 +139,8 @@ export async function PUT(req: Request) {
       description,
       email,
       personal_email,
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       office_phone,
       mobile_phone,
       website,
@@ -157,7 +157,7 @@ export async function PUT(req: Request) {
 
     console.log(assigned_account, "assigned_account");
 
-    const newContact = await prismadb.crm_Contacts.update({
+    const newContact = await prismadb.contact.update({
       where: {
         id,
       },
@@ -183,8 +183,8 @@ export async function PUT(req: Request) {
         description,
         email,
         personal_email,
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         office_phone,
         mobile_phone,
         website,
@@ -216,12 +216,12 @@ export async function PUT(req: Request) {
         to: notifyRecipient.email || "info@softbase.cz",
         subject:
           notifyRecipient.userLanguage === "en"
-            ? `New contact ${first_name} ${last_name} has been added to the system and assigned to you.`
-            : `Nový kontakt ${first_name} ${last_name} byla přidána do systému a přidělena vám.`,
+            ? `New contact ${firstName} ${lastName} has been added to the system and assigned to you.`
+            : `Nový kontakt ${firstName} ${lastName} byla přidána do systému a přidělena vám.`,
         text:
           notifyRecipient.userLanguage === "en"
-            ? `New contact ${first_name} ${last_name} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contacts/${newContact.id}`
-            : `Nový kontakt ${first_name} ${last_name} byla přidán do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contact/${newContact.id}`,
+            ? `New contact ${firstName} ${lastName} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contacts/${newContact.id}`
+            : `Nový kontakt ${firstName} ${lastName} byla přidán do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/contact/${newContact.id}`,
       });
     } */
 

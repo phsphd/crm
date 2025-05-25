@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       industry,
     } = body;
 
-    const newAccount = await prismadb.crm_Accounts.create({
+    const newAccount = await prismadb.company.create({
       data: {
         v: 0,
         createdBy: session.user.id,
@@ -110,7 +110,7 @@ export async function PUT(req: Request) {
       industry,
     } = body;
 
-    const newAccount = await prismadb.crm_Accounts.update({
+    const newAccount = await prismadb.company.update({
       where: {
         id,
       },
@@ -157,7 +157,7 @@ export async function GET(req: Request) {
     return new NextResponse("Unauthenticated", { status: 401 });
   }
   try {
-    const accounts = await prismadb.crm_Accounts.findMany({});
+    const accounts = await prismadb.company.findMany({});
 
     return NextResponse.json(accounts, { status: 200 });
   } catch (error) {

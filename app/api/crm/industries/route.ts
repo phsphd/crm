@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    const data = await prismadb.crm_Industry_Type.findMany({});
+    const data = await prismadb.industryType.findMany({});
 
     return NextResponse.json(data);
   } catch (error) {

@@ -4,9 +4,9 @@ This function is used for CRM tasks and Projects tasks. CRM Tasks (crm_Acccount_
 */
 
 export const getTaskComments = async (taskId: string) => {
-  const data = await prismadb.tasksComments.findMany({
+  const data = await prismadb.taskComment.findMany({
     where: {
-      task: taskId,
+      taskId: taskId,  // Field name is 'taskId', not 'task'
     },
     include: {
       assigned_user: {

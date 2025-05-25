@@ -1,7 +1,7 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getAccount = async (accountId: string) => {
-  const data = await prismadb.crm_Accounts.findFirst({
+  const data = await prismadb.company.findFirst({
     where: {
       id: accountId,
     },

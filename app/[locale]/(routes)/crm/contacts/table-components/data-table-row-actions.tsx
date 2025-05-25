@@ -77,9 +77,9 @@ export function DataTableRowActions<TData>({
         title={
           "Update Contact" +
           " - " +
-          contact?.first_name +
+          contact?.firstName +
           " " +
-          contact?.last_name
+          contact?.lastName
         }
         description="Update contact details"
         open={updateOpen}

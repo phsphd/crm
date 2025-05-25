@@ -59,8 +59,8 @@ export function NewContactForm({
     birthday_year: z.string().optional().nullable(),
     birthday_month: z.string().optional().nullable(),
     birthday_day: z.string().optional().nullable(),
-    first_name: z.string().optional(),
-    last_name: z.string(),
+    firstName: z.string().optional(),
+    lastName: z.string(),
     description: z.string().optional(),
     email: z.string(),
     personal_email: z.string().optional(),
@@ -115,8 +115,8 @@ export function NewContactForm({
     } finally {
       setIsLoading(false);
       form.reset({
-        first_name: "",
-        last_name: "",
+        firstName: "",
+        lastName: "",
         description: "",
         email: "",
         personal_email: "",

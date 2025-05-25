@@ -27,7 +27,7 @@ export async function PUT(req: Request, props: { params: Promise<{ contactId: st
   }
 
   try {
-    await prismadb.crm_Contacts.update({
+    await prismadb.contact.update({
       where: {
         id: params.contactId,
       },

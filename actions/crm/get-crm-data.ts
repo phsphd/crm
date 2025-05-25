@@ -6,15 +6,15 @@ export const getAllCrmData = async () => {
       userStatus: "ACTIVE",
     },
   });
-  const accounts = await prismadb.crm_Accounts.findMany({});
-  const opportunities = await prismadb.crm_Opportunities.findMany({});
-  const leads = await prismadb.crm_Leads.findMany({});
-  const contacts = await prismadb.crm_Contacts.findMany({});
-  const contracts = await prismadb.crm_Contracts.findMany({});
-  const saleTypes = await prismadb.crm_Opportunities_Type.findMany({});
-  const saleStages = await prismadb.crm_Opportunities_Sales_Stages.findMany({});
-  const campaigns = await prismadb.crm_campaigns.findMany({});
-  const industries = await prismadb.crm_Industry_Type.findMany({});
+  const accounts = await prismadb.company.findMany({});
+  const opportunities = await prismadb.opportunity.findMany({});
+  const leads = await prismadb.lead.findMany({});
+  const contacts = await prismadb.contact.findMany({});
+  const contracts = await prismadb.contract.findMany({});           // ✅ Already correct
+  const saleTypes = await prismadb.opportunityType.findMany({});    // Changed
+  const saleStages = await prismadb.salesStage.findMany({});        // Changed  
+  const campaigns = await prismadb.campaign.findMany({});           // ✅ Already correct
+  const industries = await prismadb.industryType.findMany({});      // Changed
 
   const data = {
     users,

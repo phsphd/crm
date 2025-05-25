@@ -13,7 +13,7 @@ export async function DELETE(req: Request, props: { params: Promise<{ accountId:
   }
 
   try {
-    await prismadb.crm_Accounts.delete({
+    await prismadb.company.delete({
       where: {
         id: params.accountId,
       },

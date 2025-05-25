@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import { ElementRef, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { crm_Accounts, Users } from "@prisma/client";
+import { Company, Users } from "@prisma/client";
 
 import { useAction } from "@/hooks/use-action";
 
@@ -24,7 +24,7 @@ const CreateContractForm = ({
   accountId,
 }: {
   users: Users[];
-  accounts: crm_Accounts[];
+  accounts: Company[];
   accountId: string;
 }) => {
   const router = useRouter();

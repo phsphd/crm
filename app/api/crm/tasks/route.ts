@@ -19,7 +19,7 @@ export async function DELETE(req: Request) {
   }
 
   try {
-    const currentTask = await prismadb.crm_Accounts_Tasks.findUnique({
+    const currentTask = await prismadb.task.findUnique({
       where: {
         id,
       },
@@ -31,7 +31,7 @@ export async function DELETE(req: Request) {
       },
     });
 
-    await prismadb.crm_Accounts_Tasks.delete({
+    await prismadb.task.delete({
       where: {
         id,
       },

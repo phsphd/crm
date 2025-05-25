@@ -33,7 +33,7 @@ import { Textarea } from "@/components/ui/textarea";
 import fetcher from "@/lib/fetcher";
 import useSWR from "swr";
 import SuspenseLoading from "@/components/loadings/suspense";
-import { crm_Accounts } from "@prisma/client";
+import { Company } from "@prisma/client";
 
 interface UpdateAccountFormProps {
   //TODO: fix this any

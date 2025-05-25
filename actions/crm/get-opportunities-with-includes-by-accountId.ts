@@ -1,9 +1,9 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getOpportunitiesFullByAccountId = async (accountId: string) => {
-  const data = await prismadb.crm_Opportunities.findMany({
+  const data = await prismadb.opportunity.findMany({
     where: {
-      account: accountId,
+      companyId: accountId,
     },
     include: {
       assigned_account: {
@@ -23,7 +23,7 @@ export const getOpportunitiesFullByAccountId = async (accountId: string) => {
       },
     },
     orderBy: {
-      created_on: "desc",
+      createdAt: "desc",
     },
   });
 

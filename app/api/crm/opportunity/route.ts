@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
     //console.log(req.body, "req.body");
 
-    const newOpportunity = await prismadb.crm_Opportunities.create({
+    const newOpportunity = await prismadb.opportunity.create({
       data: {
         account: account,
         assigned_to: assigned_to,
@@ -120,7 +120,7 @@ export async function PUT(req: Request) {
 
     //console.log(req.body, "req.body");
 
-    const updatedOpportunity = await prismadb.crm_Opportunities.update({
+    const updatedOpportunity = await prismadb.opportunity.update({
       where: { id },
       data: {
         account: account,
@@ -181,14 +181,14 @@ export async function GET(req: Request) {
 
   try {
     const users = await prismadb.user.findMany({});
-    const accounts = await prismadb.crm_Accounts.findMany({});
-    const contacts = await prismadb.crm_Contacts.findMany({});
-    const saleTypes = await prismadb.crm_Opportunities_Type.findMany({});
-    const saleStages = await prismadb.crm_Opportunities_Sales_Stages.findMany(
+    const accounts = await prismadb.company.findMany({});
+    const contacts = await prismadb.contact.findMany({});
+    const saleTypes = await prismadb.opportunityType.findMany({});
+    const saleStages = await prismadb.salesStage.findMany(
       {}
     );
-    const campaigns = await prismadb.crm_campaigns.findMany({});
-    const industries = await prismadb.crm_Industry_Type.findMany({});
+    const campaigns = await prismadb.campaign.findMany({});
+    const industries = await prismadb.industryType.findMany({});
 
     const data = {
       users,

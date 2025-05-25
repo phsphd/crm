@@ -48,11 +48,21 @@ model User {
   emailVerified DateTime?
   image         String?
   role          String?   @default("USER")
+  userLanguage  String?   @default("en") // Add missing field
+  avatar        String?
+  is_admin      Boolean   @default(false)
+  is_account_admin Boolean @default(false)
+  userStatus    String    @default("ACTIVE") // ACTIVE, PENDING, INACTIVE
+  lastLoginAt   DateTime?
+  password      String?   // For credentials auth
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   accounts Account[]
   sessions Session[]
+  
+  // Business account settings (one-to-one)
+  myAccount    MyAccount?
   
   // CRM specific relations
   companies    Company[]
@@ -64,10 +74,22 @@ model User {
   invoices     Invoice[]
   projects     Project[]
   documents    Document[]
+  contracts    Contract[]
+  campaigns    Campaign[]
   
   // Board system relations
   boards       Board[]
   assignedBoardItems BoardItem[]
+  
+  // Task comments relation
+  taskComments TaskComment[]
+  
+  // Assigned relations (as manager)
+  assignedAccounts Company[] @relation("AssignedAccounts")
+  assignedContacts Contact[] @relation("AssignedContacts")
+  assignedContracts Contract[] @relation("AssignedContracts")
+  assignedLeads Lead[] @relation("AssignedLeads")
+  assignedOpportunities Opportunity[] @relation("AssignedOpportunities")
 }
 
 model VerificationToken {
@@ -99,13 +121,96 @@ model Company {
   userId      String
   user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
   
+  // CRM Relations
   contacts     Contact[]
   leads        Lead[]
   opportunities Opportunity[]
   invoices     Invoice[]
   projects     Project[]
+  contracts    Contract[]
+  
+  // Account tasks relation
+  accountTasks Task[] @relation("AccountTasks")
+  
+  // Account documents relation  
+  assigned_documents Document[] @relation("CompanyDocuments")
+  
+  // Assigned user relation (account manager)
+  assignedToUserId String?
+  assigned_to_user User? @relation(fields: [assignedToUserId], references: [id], onDelete: SetNull, name: "AssignedAccounts")
+  
+  // Assigned contact relation
+  assignedContactId String?
+  assignedContact   Contact? @relation(fields: [assignedContactId], references: [id], onDelete: SetNull, name: "ContactAssignedAccounts")
+  
+  // Assigned account contracts relation
+  assignedAccountContracts Contract[] @relation("AssignedAccountContracts")
+  
+  // Assigned leads relation
+  assignedLeads Lead[] @relation("LeadAssignedAccounts")
+  
+  // ADD THIS LINE FOR ASSIGNED OPPORTUNITIES:
+  assignedAccountOpportunities Opportunity[] @relation("AssignedAccountOpportunities")
+  
+  @@map("crm_Accounts")
 }
-
+model MyAccount {
+  id                    String   @id @default(cuid())
+  company_name          String
+  is_person             Boolean  @default(false)
+  email                 String
+  email_accountant      String
+  
+  // Phone fields
+  phone_prefix          String?
+  phone                 String?
+  mobile_prefix         String?
+  mobile                String?
+  fax_prefix            String?
+  fax                   String?
+  
+  // Website
+  website               String?
+  
+  // Office Address
+  street                String?
+  city                  String?
+  state                 String?
+  zip                   String?
+  country               String?
+  country_code          String?
+  
+  // Billing Address
+  billing_street        String
+  billing_city          String
+  billing_state         String?
+  billing_zip           String
+  billing_country       String
+  billing_country_code  String
+  
+  // Financial Information
+  currency              String
+  currency_symbol       String
+  VAT_number            String
+  TAX_number            String?
+  
+  // Bank Information
+  bank_name             String
+  bank_account          String
+  bank_code             String
+  bank_IBAN             String?
+  bank_SWIFT            String?
+  
+  // Timestamps
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  // User relation (assuming one account per user)
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("my_accounts")
+}
 model Contact {
   id          String   @id @default(cuid())
   firstName   String
@@ -133,6 +238,18 @@ model Contact {
   opportunities Opportunity[]
   tasks        Task[]
   events       Event[]
+  contracts    Contract[]
+  
+  // Additional CRM relations
+  assigned_opportunities Opportunity[] @relation("ContactAssignedOpportunities")
+  assigned_documents     Document[]    @relation("ContactAssignedDocuments")
+  assigned_accounts      Company[]     @relation("ContactAssignedAccounts")
+  
+  // Assigned user relation (contact manager)
+  assignedToUserId String?
+  assigned_to_user User? @relation(fields: [assignedToUserId], references: [id], onDelete: SetNull, name: "AssignedContacts")
+  
+  @@map("crm_Contacts") // Map to CRM contacts table
 }
 
 model Lead {
@@ -155,9 +272,21 @@ model Lead {
   contactId   String?
   contact     Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
   
+  // Assigned user relation
+  assignedToUserId String?
+  assigned_to_user User? @relation(fields: [assignedToUserId], references: [id], onDelete: SetNull, name: "AssignedLeads")
+  
+  // Additional CRM relations 
+  assigned_accounts    Company[]  @relation("LeadAssignedAccounts")
+  assigned_documents   Document[] @relation("LeadAssignedDocuments")  // THIS LINE IS REQUIRED
+  
   tasks       Task[]
   events      Event[]
+  
+  @@map("crm_Leads")
 }
+
+ 
 
 model Opportunity {
   id          String   @id @default(cuid())
@@ -179,8 +308,26 @@ model Opportunity {
   contactId   String?
   contact     Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
   
+  // Assigned contact relation
+  assignedContactId String?
+  assignedContact   Contact? @relation(fields: [assignedContactId], references: [id], onDelete: SetNull, name: "ContactAssignedOpportunities")
+  
+  // Assigned account relation
+  assignedAccountId String?
+  assigned_account  Company? @relation(fields: [assignedAccountId], references: [id], onDelete: SetNull, name: "AssignedAccountOpportunities")
+  
+  // Assigned user relation (opportunity manager)
+  assignedToUserId String?
+  assigned_to_user User? @relation(fields: [assignedToUserId], references: [id], onDelete: SetNull, name: "AssignedOpportunities")
+  
+  // Sales stage relation
+  salesStageId String?
+  assigned_sales_stage SalesStage? @relation(fields: [salesStageId], references: [id], onDelete: SetNull, name: "OpportunitySalesStages")
+  
   tasks       Task[]
   events      Event[]
+  
+  @@map("crm_Opportunities") // Map to CRM opportunities table
 }
 
 model Task {
@@ -209,8 +356,106 @@ model Task {
   projectId     String?
   project       Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
   
-  // Board system relation
+  // Board system relations
+  sectionId     String?
+  section       Section? @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  
   boardItems    BoardItem[]
+  
+  // CRM specific relations
+  documents     TaskDocument[]
+  comments      TaskComment[]
+  
+  // Account relation for CRM tasks
+  accountId     String?
+  account       Company? @relation(fields: [accountId], references: [id], onDelete: SetNull, name: "AccountTasks")
+  
+  // CRM Accounts Tasks mapping
+  @@map("crm_Accounts_Tasks")
+}
+
+// Task Documents relation
+model TaskDocument {
+  id                  String   @id @default(cuid())
+  document_name       String
+  document_file_url   String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  taskId              String
+  task                Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+}
+
+// Task Comments
+model TaskComment {
+  id          String   @id @default(cuid())
+  comment     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  taskId      String
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  userId      String
+  assigned_user User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// Contracts
+model Contract {
+  id                    String   @id @default(cuid())
+  v                     Int      @default(0) // Version
+  title                 String
+  description           String?
+  value                 Float?   // Contract value
+  status                String   @default("DRAFT") // DRAFT, ACTIVE, EXPIRED, CANCELLED
+  startDate             DateTime?
+  endDate               DateTime?
+  renewalReminderDate   DateTime?
+  customerSignedDate    DateTime?
+  companySignedDate     DateTime?
+  account               String?  // Account reference
+  assigned_to           String?  // Assigned user ID (foreign key)
+  createdBy             String   // Creator user ID
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Assigned user relation
+  assigned_to_user User? @relation(fields: [assigned_to], references: [id], onDelete: SetNull, name: "AssignedContracts")
+  
+  companyId   String?
+  company     Company? @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  
+  // Assigned account relation
+  assignedAccountId String?
+  assigned_account  Company? @relation(fields: [assignedAccountId], references: [id], onDelete: SetNull, name: "AssignedAccountContracts")
+  
+  contactId   String?
+  contact     Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  
+  @@map("crm_Contracts")
+}
+
+// Campaigns
+model Campaign {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  status      String   @default("ACTIVE") // ACTIVE, INACTIVE, COMPLETED
+  type        String?  // EMAIL, SMS, SOCIAL, etc.
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Float?
+  target      String?  // Target audience
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("crm_campaigns")
 }
 
 model Event {
@@ -309,6 +554,18 @@ model Document {
   
   userId      String
   user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Company documents relation
+  companyId   String?
+  company     Company? @relation(fields: [companyId], references: [id], onDelete: SetNull, name: "CompanyDocuments")
+  
+  // Assigned contact relation
+  assignedContactId String?
+  assignedContact   Contact? @relation(fields: [assignedContactId], references: [id], onDelete: SetNull, name: "ContactAssignedDocuments")
+  
+  // ADD THESE LINES FOR LEAD RELATION:
+  assignedLeadId String?
+  assignedLead   Lead? @relation(fields: [assignedLeadId], references: [id], onDelete: SetNull, name: "LeadAssignedDocuments")
 }
 
 // System Services/Settings for storing configuration
@@ -363,6 +620,9 @@ model Section {
   board       Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
   
   boardItems  BoardItem[]
+  
+  // Direct relation to tasks (if needed)
+  tasks       Task[]
 
   @@map("sections") // Maps to sections table name
 }
@@ -385,4 +645,45 @@ model BoardItem {
   
   taskId      String?
   task        Task?    @relation(fields: [taskId], references: [id], onDelete: SetNull)
+}
+
+// Opportunity Types lookup table
+model OpportunityType {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("crm_Opportunities_Type")
+}
+
+// Sales Stages lookup table
+model SalesStage {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  position    Int      @default(0) // For ordering stages
+  probability Int?     @default(50) // Default probability for this stage
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // ADD THIS LINE FOR OPPORTUNITY RELATION:
+  opportunities Opportunity[] @relation("OpportunitySalesStages")
+  
+  @@map("crm_Opportunities_Sales_Stages")
+}
+
+// Industry Types lookup table
+model IndustryType {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("crm_Industry_Type")
 }

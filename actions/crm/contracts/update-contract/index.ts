@@ -58,7 +58,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   try {
-    const result = await prismadb.crm_Contracts.update({
+    const result = await prismadb.contract.update({
       where: {
         id: data.id,
       },

@@ -9,7 +9,7 @@ interface ContractDetailPageProps {
 const ContractPage = async (props: ContractDetailPageProps) => {
   const params = await props.params;
   const { contractId } = params;
-  const contract = await prismadb.crm_Contracts.findUnique({
+  const contract = await prismadb.contract.findUnique({
     where: {
       id: contractId,
     },

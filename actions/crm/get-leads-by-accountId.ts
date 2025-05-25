@@ -1,9 +1,9 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getLeadsByAccountId = async (accountId: string) => {
-  const data = await prismadb.crm_Leads.findMany({
+  const data = await prismadb.lead.findMany({
     where: {
-      accountsIDs: accountId,
+      companyId: accountId,
     },
     include: {
       assigned_to_user: {

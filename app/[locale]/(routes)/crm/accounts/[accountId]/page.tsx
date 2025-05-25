@@ -17,13 +17,13 @@ import ContactsView from "../../components/ContactsView";
 import DocumentsView from "../../components/DocumentsView";
 
 import {
-  Documents,
-  crm_Accounts,
-  crm_Accounts_Tasks,
-  crm_Contacts,
-  crm_Contracts,
-  crm_Leads,
-  crm_Opportunities,
+  Document,        // was Documents
+  Company,         // was crm_Accounts (@@map("crm_Accounts"))
+  Task,            // was crm_Accounts_Tasks (@@map("crm_Accounts_Tasks"))
+  Contact,         // was crm_Contacts (@@map("crm_Contacts"))
+  Contract,        // was crm_Contracts (@@map("crm_Contracts"))
+  Lead,            // was crm_Leads (@@map("crm_Leads"))
+  Opportunity,     // was crm_Opportunities (@@map("crm_Opportunities"))
 } from "@prisma/client";
 
 import AccountsTasksView from "./components/TasksView";
@@ -38,14 +38,14 @@ interface AccountDetailPageProps {
 const AccountDetailPage = async (props: AccountDetailPageProps) => {
   const params = await props.params;
   const { accountId } = params;
-  const account: crm_Accounts | null = await getAccount(accountId);
-  const opportunities: crm_Opportunities[] =
-    await getOpportunitiesFullByAccountId(accountId);
-  const contacts: crm_Contacts[] = await getContactsByAccountId(accountId);
-  const contracts: crm_Contracts[] = await getContractsByAccountId(accountId);
-  const leads: crm_Leads[] = await getLeadsByAccountId(accountId);
-  const documents: Documents[] = await getDocumentsByAccountId(accountId);
-  const tasks: crm_Accounts_Tasks[] = await getAccountsTasks(accountId);
+  const account: Company | null = await getAccount(accountId);
+  const opportunities: Opportunity[] =
+  await getOpportunitiesFullByAccountId(accountId);
+  const contacts: Contact[] = await getContactsByAccountId(accountId);
+  const contracts: Contract[] = await getContractsByAccountId(accountId);
+  const leads: Lead[] = await getLeadsByAccountId(accountId);
+  const documents: Document[] = await getDocumentsByAccountId(accountId);
+  const tasks: Task[] = await getAccountsTasks(accountId);
   const crmData = await getAllCrmData();
 
   if (!account) return <div>Account not found</div>;

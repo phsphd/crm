@@ -418,7 +418,7 @@ export function UpdateOpportunityForm({
                         <SelectContent className="flex overflow-y-auto h-56">
                           {contacts.map((contact: any) => (
                             <SelectItem key={contact.id} value={contact.id}>
-                              {contact.first_name + " " + contact.last_name}
+                              {contact.firstName + " " + contact.lastName}
                             </SelectItem>
                           ))}
                         </SelectContent>

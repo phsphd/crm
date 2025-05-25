@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { crm_Opportunities } from "@prisma/client";
+import { Opportunity } from "@prisma/client";
 import {
   CalendarDays,
   ClipboardList,
@@ -27,7 +27,7 @@ interface OppsViewProps {
     assigned_to_user: { name: string };
     assigned_account: { name: string };
     assigned_type: { name: string };
-  } & crm_Opportunities;
+  } & Opportunity;
 }
 
 export async function BasicView({ data }: OppsViewProps) {

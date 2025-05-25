@@ -27,7 +27,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const task = await prismadb.crm_Accounts_Tasks.create({
+    const task = await prismadb.task.create({
       data: {
         v: 0,
         priority: priority,

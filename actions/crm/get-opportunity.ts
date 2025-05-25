@@ -1,7 +1,7 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getOpportunity = async (opportunityId: string) => {
-  const data = await prismadb.crm_Opportunities.findFirst({
+  const data = await prismadb.opportunity.findFirst({
     where: {
       id: opportunityId,
     },
@@ -24,8 +24,8 @@ export const getOpportunity = async (opportunityId: string) => {
       contacts: {
         select: {
           id: true,
-          first_name: true,
-          last_name: true,
+          firstName: true,
+          lastName: true,
           office_phone: true,
           mobile_phone: true,
           email: true,

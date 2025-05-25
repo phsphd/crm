@@ -1,14 +1,14 @@
 import { prismadb } from "@/lib/prisma";
 
 export const getContacts = async () => {
-  const data = await prismadb.crm_Contacts.findMany({
+  const data = await prismadb.contact.findMany({
     include: {
       assigned_to_user: {
         select: {
           name: true,
         },
       },
-      crate_by_user: {
+      user: {
         select: {
           name: true,
         },
