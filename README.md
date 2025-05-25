@@ -1,38 +1,16 @@
 <a href="https://nextcrm.app/">
-  <h1 align="center">NextCRM</h1>
+  <h1 align="center">NextJS CRM using Postgres</h1>
 </a>
 
-<p align="center">
-<img alt="OG" src="public/images/opengraph-image.png" />
-</p>
+ 
 
-<!-- <p align="center">
-NextCRM is a CRM build on top of the Next.JS 14 using TypeScript, great UI library shadcn, Prisma and MongoDB as a database. Upload things as a S3 blob for document storage.
-</p> -->
+  <p align="center">
+NextJS CRM is a CRM build on top of the Next.JS 14 using TypeScript, great UI library shadcn, Prisma and PostGres as a database. 
+</p>  
 
-<p align="center">
-<a href="https://twitter.com/nextcrmapp">
-<img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Ftwitter.com%2Fnextcrmapp">
-</a>
-  <a href="https://github.com/pdovhomilja/nextcrm-app/blob/main/LICENSE">
-    <img alt="GitHub License" src="https://img.shields.io/github/license/pdovhomilja/nextcrm-app">
-  </a>
-</p>
-
-<p align="center">
-   <a href="#online-demo"><strong>Introduction</strong></a> ·
-   <a href="#tech-stack--features"><strong>Tech Stack + Features</strong></a> ·
-   <a href="#roadmap"><strong>Roadmap</strong></a> ·
-   <a href="#installation"><strong>Installation</strong></a> ·
-   <a href="#repo-activity"><strong>Repo activity</strong></a> ·
-   <a href="#license"><strong>License</strong></a> ·
-   <a href="https://discord.gg/dHyxhTEzUb"><strong>Discord</strong>
-</p>
-<br/>
-
-## Online Demo
-
-You can try it here [demo.nextcrm.io](https://demo.nextcrm.io), login via Google account or create new user and password.
+ 
+Folked from   https://github.com/pdovhomilja/nextcrm-app.git
+ 
 
 ## Tech Stack + Features
 
@@ -46,7 +24,7 @@ You can try it here [demo.nextcrm.io](https://demo.nextcrm.io), login via Google
 ### Platforms
 
 - [Vercel](https://vercel.com/) – Easily preview & deploy changes with git
-- [Mongo DB Atlas](https://mongodb.com/) – A database platform for seamless, scalable data management
+ 
 - [Resend](https://resend.com/) – A powerful email framework for streamlined email development together with [react.email](https://react.email)
 
 ### Data fetching
@@ -70,45 +48,6 @@ You can try it here [demo.nextcrm.io](https://demo.nextcrm.io), login via Google
 
 ![hero](/public/og.png)
 
-## Roadmap
-
-1. More AI powered - daily summary of tasks and project (OpenAI integration) - in progress
-2. Email campaigns management - integration with MailChimp and Listmonk - in planning
-3. ~~Docker version - in planning (There will be complete bundle to run NextCRM on-premise)~~
-4. Testing - Jest + Cypress (if anyone want to help I will be very happy) - in planning
-5. Fix all Types issue (no more "any") - in progress
-6. i18n - localization - in progress (if anyone want to help I will be very happy)
-7. Turborepo - in planning
-8. ~~Upgrade to Next.js 14 - in planning~~
-9. Email client - in planning
-
-## Emails
-
-We use [resend.com](https://resend.com) + [react.email](https://react.email) as primary email sender and email templates.
-
-## Reports
-
-We use Tremor charts as a tool for creating charts in NextCRM
-
-![hero](/public/reports.png)
-
-## Video (YouTube channel with functions showcase)
-
-[Youtube Channel](https://www.youtube.com/@NextCRM_IO) </br>
-[Invoice module (video)](https://youtu.be/NSMsBMy07Pg)
-
-## Documentation
-
-Available soon at: http://docs.nextcrm.io
-
-## Installation
-
-<details><summary><b>Show instructions</b></summary>
-
-1. Clone the repository:
-
-   ```sh
-   git clone https://github.com/pdovhomilja/nextcrm-app.git
    cd nextcrm-app
    ```
 
@@ -163,68 +102,6 @@ Available soon at: http://docs.nextcrm.io
 
 </details>
 
-## Docker installation
+ 
 
-[Link to Docker HUB](https://hub.docker.com/repository/docker/nextcrmio/nextcrm/general)
-
-<details>
-<summary><b>Show instructions</b></summary>
-
-1. Make sure you have docker and docker-compose installed
-
-2. Prepare .env and .env.local files
-
-   ```create
-   .env (for Prisma URI string) and .env.local (all others ENVs) file inside docker folder
-   ```
-
-3. build docker image
-
-   ```sh
-   docker build -t nextcrm .
-   ```
-
-4. Run docker container
-
-   ```sh
-   docker run -p 3000:3000 nextcrm
-   ```
-
-5. http://localhost:3000
-</details>
-
-## Contact
-
-[www.dovhomilja.cz](https://www.dovhomilja.cz)
-</br>
-[<img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Ftwitter.com%2Fdovhomilja">
-](https://twitter.com/dovhomilja)
-
-## Contributing
-
-We are open to the NextCRM community contributions. Every contribution is welcome.
-
-### Issues
-
-- [Open an issue](https://github.com/pdovhomilja/nextcrm-app/issues) if you find a bug or have a suggestion for improvements.
-
-### NextCRM Super heroes
-
-<a href="https://github.com/pdovhomilja/nextcrm-app/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=pdovhomilja/nextcrm-app" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
-
-## Repo Activity
-
-![Alt](https://repobeats.axiom.co/api/embed/e6bed6e15724f38c278ad2edcf0573a1bb24bed6.svg "Repobeats analytics image")
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=pdovhomilja/nextcrm-app&type=Timeline)](https://star-history.com/#pdovhomilja/nextcrm-app&Timeline)
-
-## License
-
-Licensed under the [MIT license](https://github.com/pdovhomilja/nextcrm-app/blob/main/LICENSE.md).
-# crm
+ 
